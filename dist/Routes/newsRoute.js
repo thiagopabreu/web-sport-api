@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.newsRouter = void 0;
+const express_1 = require("express");
+const newsController_1 = require("../Controller/newsController");
+let router = (0, express_1.Router)();
+const newsController = new newsController_1.NewsController();
+router.get('/getNews', newsController.getNews);
+router.post('/registerNews', newsController.registerNews);
+exports.newsRouter = router;
