@@ -21,6 +21,10 @@ export async function initPosicaoTimeModel() {
             allowNull: false,
             autoIncrement: true
         },
+        campeonato_id_fk: {
+            type: DataTypes.BIGINT,
+            allowNull: false
+        },
         posicao: {
           type: DataTypes.INTEGER,
           allowNull: false
@@ -33,7 +37,7 @@ export async function initPosicaoTimeModel() {
         sequelize: sequelize
     })
 
-    await PosicaoTime.sync().then(() => {
+    await PosicaoTime.sync({force: false}).then(() => {
         console.log('tabela posicao_time criada')
     }).catch((error) => {
         console.error(error)

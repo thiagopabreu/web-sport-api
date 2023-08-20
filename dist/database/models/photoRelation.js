@@ -1,5 +1,4 @@
 "use strict";
-// id (PK) | titulo | conteudo | data_publicacao | categoria_id (FK)
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -10,57 +9,45 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.initNoticiaModel = exports.Noticia = void 0;
+exports.initRelacionamentoFotoModel = exports.RelacionamentoFoto = void 0;
 const sequelize_1 = require("sequelize");
 const database_1 = require("../database");
-class Noticia extends sequelize_1.Model {
-    static associate(models) {
-        Noticia.belongsTo(models.Categoria, { foreignKey: 'categoria_id' });
-    }
+class RelacionamentoFoto extends sequelize_1.Model {
 }
-exports.Noticia = Noticia;
-function initNoticiaModel() {
+exports.RelacionamentoFoto = RelacionamentoFoto;
+function initRelacionamentoFotoModel() {
     return __awaiter(this, void 0, void 0, function* () {
-        Noticia.init({
+        RelacionamentoFoto.init({
             id: {
                 type: sequelize_1.DataTypes.BIGINT,
                 primaryKey: true,
                 allowNull: false,
                 autoIncrement: true
             },
-            titulo: {
+            caminho: {
                 type: sequelize_1.DataTypes.STRING,
                 allowNull: false
             },
-            sub_conteudo: {
-                type: sequelize_1.DataTypes.TEXT,
+            id_item_fk: {
+                type: sequelize_1.DataTypes.BIGINT,
                 allowNull: false
             },
-            conteudo: {
-                type: sequelize_1.DataTypes.TEXT,
-                allowNull: false
-            },
-            data_publicacao: {
-                type: sequelize_1.DataTypes.DATE,
+            id_foto_fk: {
+                type: sequelize_1.DataTypes.STRING,
                 allowNull: false
             }
         }, {
             timestamps: false,
             freezeTableName: true,
             underscored: true,
-            tableName: 'noticias',
-            sequelize: database_1.sequelize,
-            name: {
-                singular: 'noticia',
-                plural: 'noticias'
-            }
+            tableName: 'relacionamento_foto',
+            sequelize: database_1.sequelize
         });
-        //Noticia.associate({ Categoria })
-        yield Noticia.sync({ force: true }).then(() => {
-            console.log('tabela noticia criada');
+        yield RelacionamentoFoto.sync().then(() => {
+            console.log('tabela relacionamento_foto criada');
         }).catch((error) => {
             console.error(error);
         });
     });
 }
-exports.initNoticiaModel = initNoticiaModel;
+exports.initRelacionamentoFotoModel = initRelacionamentoFotoModel;

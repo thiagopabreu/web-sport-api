@@ -7,18 +7,23 @@ import { initTimeModel } from './database/models/teamModel';
 import PosicaoTime, { initPosicaoTimeModel } from './database/models/teamPositionModel';
 import { initEventoModel } from './database/models/eventModel';
 import { newsRouter } from './Routes/newsRoute';
+import { initFotoModel } from './database/models/photosModel';
+import { initRelacionamentoFotoModel } from './database/models/photoRelationModel';
 import cors from 'cors'
+import { photoRouter } from './Routes/photoRoute';
+import { relationRouter } from './Routes/relationPhotoRoute';
+import path from 'path';
 const app = express();
 
 const port = 8000;
 
 app.use(cors())
 app.use(express.json())
-
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 app.use('/news', newsRouter)
-
-
+app.use('/photo', photoRouter)
+app.use('/relation', relationRouter)
 
 
 app.get('/', (req: Request, res: Response) => {
@@ -34,4 +39,6 @@ export const server = app.listen(port, async () => {
     await initTimeModel();
     await initPosicaoTimeModel();
     await initEventoModel();
+    await initFotoModel()
+    await initRelacionamentoFotoModel();
 })

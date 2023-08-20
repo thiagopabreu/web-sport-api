@@ -7,7 +7,7 @@ import Categoria from "./categoryModel";
 export class Noticia extends Model {
     declare id: number;
     declare titulo: string;
-    declare conteudo: Text;
+    declare sub_conteudo: Text;
     declare data_publicacao: Date;
 
     static associate(models: any) {
@@ -28,6 +28,10 @@ export async function initNoticiaModel() {
             type: DataTypes.STRING,
             allowNull: false
         },
+        sub_conteudo: {
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
         conteudo: {
             type: DataTypes.TEXT,
             allowNull: false
@@ -36,6 +40,7 @@ export async function initNoticiaModel() {
             type: DataTypes.DATE,
             allowNull: false
         }
+        
     }, 
     {
         timestamps: false,
@@ -52,7 +57,7 @@ export async function initNoticiaModel() {
 
     //Noticia.associate({ Categoria })
 
-    await Noticia.sync().then(() => {
+    await Noticia.sync({force: true}).then(() => {
         console.log('tabela noticia criada')
     }).catch((error) => {
         console.error(error)

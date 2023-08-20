@@ -28,6 +28,10 @@ function initPosicaoTimeModel() {
                 allowNull: false,
                 autoIncrement: true
             },
+            campeonato_id_fk: {
+                type: sequelize_1.DataTypes.BIGINT,
+                allowNull: false
+            },
             posicao: {
                 type: sequelize_1.DataTypes.INTEGER,
                 allowNull: false
@@ -39,7 +43,7 @@ function initPosicaoTimeModel() {
             tableName: 'posicao_time',
             sequelize: database_1.sequelize
         });
-        yield PosicaoTime.sync().then(() => {
+        yield PosicaoTime.sync({ force: false }).then(() => {
             console.log('tabela posicao_time criada');
         }).catch((error) => {
             console.error(error);

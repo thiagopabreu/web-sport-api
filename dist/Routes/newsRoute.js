@@ -6,5 +6,8 @@ const newsController_1 = require("../Controller/newsController");
 let router = (0, express_1.Router)();
 const newsController = new newsController_1.NewsController();
 router.get('/getNews', newsController.getNews);
+router.get('/getANews/:id', newsController.getANews);
 router.post('/registerNews', newsController.registerNews);
+router.put('/updateNews/:id', newsController.updateNews);
+router.delete('/deleteNews/:id', newsController.deleteNews);
 exports.newsRouter = router;

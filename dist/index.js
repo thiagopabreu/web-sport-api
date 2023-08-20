@@ -22,12 +22,20 @@ const teamModel_1 = require("./database/models/teamModel");
 const teamPositionModel_1 = require("./database/models/teamPositionModel");
 const eventModel_1 = require("./database/models/eventModel");
 const newsRoute_1 = require("./Routes/newsRoute");
+const photosModel_1 = require("./database/models/photosModel");
+const photoRelationModel_1 = require("./database/models/photoRelationModel");
 const cors_1 = __importDefault(require("cors"));
+const photoRoute_1 = require("./Routes/photoRoute");
+const relationPhotoRoute_1 = require("./Routes/relationPhotoRoute");
+const path_1 = __importDefault(require("path"));
 const app = (0, express_1.default)();
 const port = 8000;
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
+app.use('/uploads', express_1.default.static(path_1.default.join(__dirname, 'uploads')));
 app.use('/news', newsRoute_1.newsRouter);
+app.use('/photo', photoRoute_1.photoRouter);
+app.use('/relation', relationPhotoRoute_1.relationRouter);
 app.get('/', (req, res) => {
     res.send("Oláa Mundo!");
 });
@@ -40,4 +48,6 @@ exports.server = app.listen(port, () => __awaiter(void 0, void 0, void 0, functi
     yield (0, teamModel_1.initTimeModel)();
     yield (0, teamPositionModel_1.initPosicaoTimeModel)();
     yield (0, eventModel_1.initEventoModel)();
+    yield (0, photosModel_1.initFotoModel)();
+    yield (0, photoRelationModel_1.initRelacionamentoFotoModel)();
 }));

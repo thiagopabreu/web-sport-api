@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.relationRouter = void 0;
+const express_1 = require("express");
+const relationPhotoController_1 = require("../Controller/relationPhotoController");
+const router = (0, express_1.Router)();
+const relationPhotoController = new relationPhotoController_1.RelationPhotoController();
+router.get('/getRelation/:idNews', relationPhotoController.getRelationPhotoById);
+router.post('/registerRelation', relationPhotoController.registerRelation);
+exports.relationRouter = router;
