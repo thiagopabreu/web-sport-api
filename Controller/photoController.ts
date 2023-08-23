@@ -10,6 +10,17 @@ export class PhotoController {
         const fileName = request.params.fileName;
         response.sendFile(path.join(__dirname, '../uploads', fileName))
     }
+    
+    async getPhoto(request: Request, response: Response) {
+        const id = request.params.id
+        try {
+            const photo = await Foto.findByPk(id)
+            response.status(200).json({photo: photo})
+        } catch (error) {
+            console.error(error)
+            response.status(500).json({error: error})
+        }
+    }
 
     async uploadPhoto(request: Request, response: Response) {
         try {

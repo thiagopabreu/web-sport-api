@@ -1,5 +1,4 @@
 "use strict";
-// id (PK) | titulo | conteudo | data_publicacao | categoria_id (FK)
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -9,62 +8,58 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.initNoticiaModel = exports.Noticia = void 0;
+exports.initAdminModel = exports.Admin = void 0;
 const sequelize_1 = require("sequelize");
 const database_1 = require("../database");
-class Noticia extends sequelize_1.Model {
-    static associate(models) {
-        Noticia.belongsTo(models.Categoria, { foreignKey: 'categoria_id' });
+const bcrypt_1 = __importDefault(require("bcrypt"));
+class Admin extends sequelize_1.Model {
+    comparePassword(password, passwordBD) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield bcrypt_1.default.compare(password, passwordBD);
+            console.log(result);
+            return result;
+        });
     }
 }
-exports.Noticia = Noticia;
-function initNoticiaModel() {
+exports.Admin = Admin;
+function initAdminModel() {
     return __awaiter(this, void 0, void 0, function* () {
-        Noticia.init({
+        Admin.init({
             id: {
                 type: sequelize_1.DataTypes.BIGINT,
                 primaryKey: true,
                 allowNull: false,
                 autoIncrement: true
             },
-            titulo: {
+            user: {
                 type: sequelize_1.DataTypes.STRING,
-                allowNull: false
+                allowNull: false,
+                unique: true
             },
-            sub_conteudo: {
-                type: sequelize_1.DataTypes.TEXT,
-                allowNull: false
-            },
-            conteudo: {
-                type: sequelize_1.DataTypes.TEXT,
-                allowNull: false
-            },
-            data_publicacao: {
-                type: sequelize_1.DataTypes.DATE,
-                allowNull: false
-            },
-            id_categoria_fk: {
-                type: sequelize_1.DataTypes.BIGINT,
+            senha: {
+                type: sequelize_1.DataTypes.STRING,
                 allowNull: false
             }
         }, {
             timestamps: false,
             freezeTableName: true,
             underscored: true,
-            tableName: 'noticias',
-            sequelize: database_1.sequelize,
-            name: {
-                singular: 'noticia',
-                plural: 'noticias'
-            }
+            tableName: 'admin-senha',
+            sequelize: database_1.sequelize
         });
-        //Noticia.associate({ Categoria })
-        yield Noticia.sync({ force: false }).then(() => {
-            console.log('tabela noticia criada');
+        Admin.beforeCreate((user) => __awaiter(this, void 0, void 0, function* () {
+            const hashedPassword = yield bcrypt_1.default.hash(user.senha, 10);
+            user.senha = hashedPassword;
+        }));
+        yield Admin.sync().then(() => {
+            console.log('tabela admin-senha criada');
         }).catch((error) => {
             console.error(error);
         });
     });
 }
-exports.initNoticiaModel = initNoticiaModel;
+exports.initAdminModel = initAdminModel;

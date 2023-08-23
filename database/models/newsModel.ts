@@ -8,7 +8,9 @@ export class Noticia extends Model {
     declare id: number;
     declare titulo: string;
     declare sub_conteudo: Text;
+    declare conteudo: Text;
     declare data_publicacao: Date;
+    declare id_categoria_fk: number;
 
     static associate(models: any) {
         Noticia.belongsTo(models.Categoria, { foreignKey: 'categoria_id' });
@@ -39,6 +41,10 @@ export async function initNoticiaModel() {
         data_publicacao: {
             type: DataTypes.DATE,
             allowNull: false
+        },
+        id_categoria_fk: {
+            type: DataTypes.BIGINT,
+            allowNull: false 
         }
         
     }, 
@@ -57,7 +63,7 @@ export async function initNoticiaModel() {
 
     //Noticia.associate({ Categoria })
 
-    await Noticia.sync({force: true}).then(() => {
+    await Noticia.sync({force: false}).then(() => {
         console.log('tabela noticia criada')
     }).catch((error) => {
         console.error(error)

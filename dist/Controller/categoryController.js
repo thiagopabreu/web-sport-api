@@ -19,7 +19,7 @@ class CategoryController {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 const categorys = yield categoryModel_1.default.findAll();
-                response.status(200).json({ categorys: categorys });
+                response.status(200).json({ categories: categorys });
             }
             catch (error) {
                 console.error(error);

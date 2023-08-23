@@ -38,6 +38,18 @@ function initEventoModel() {
             data_evento: {
                 type: sequelize_1.DataTypes.DATE,
                 allowNull: false
+            },
+            id_categoria_fk: {
+                type: sequelize_1.DataTypes.BIGINT,
+                allowNull: false
+            },
+            local: {
+                type: sequelize_1.DataTypes.TEXT,
+                allowNull: false
+            },
+            caminho_file: {
+                type: sequelize_1.DataTypes.TEXT,
+                allowNull: false
             }
         }, {
             timestamps: false,

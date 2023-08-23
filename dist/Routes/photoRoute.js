@@ -19,6 +19,7 @@ const storage = multer_1.default.diskStorage({
 const upload = (0, multer_1.default)({ storage: storage });
 const photoController = new photoController_1.PhotoController();
 router.get('/readPhoto/:fileName', photoController.readPhoto);
+router.get('/getPhoto/:id', photoController.getPhoto);
 router.post('/registerUpload', upload.single('file'), photoController.uploadPhoto);
 router.put('/updatePhoto/:id', upload.single('file'), photoController.updatePhoto);
 router.delete('/deletePhoto/:id', photoController.deleteImage);

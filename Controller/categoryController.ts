@@ -8,7 +8,7 @@ export class CategoryController {
         try {
             const categorys = await Categoria.findAll()
 
-            response.status(200).json({categorys: categorys})
+            response.status(200).json({categories: categorys})
         } catch (error) {
             console.error(error)
             response.status(500).json({error: {error}})

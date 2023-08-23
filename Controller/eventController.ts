@@ -32,10 +32,10 @@ export class EventController {
 
     async registerEvent(request: Request, response: Response) {
         
-        const { nome_evento, descricao, data_fim } = request.body;
+        const { nome_evento, descricao, data_evento, id_categoria_fk, local, caminho_file } = request.body;
 
         try {
-            const newEvent = await Evento.create({ nome_evento, descricao, data_fim})
+            const newEvent = await Evento.create({ nome_evento, descricao, data_evento, id_categoria_fk, local, caminho_file})
             newEvent.save();
 
             response.status(200).json({newEvent})

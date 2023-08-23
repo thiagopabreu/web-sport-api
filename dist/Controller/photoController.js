@@ -23,6 +23,19 @@ class PhotoController {
             response.sendFile(path_1.default.join(__dirname, '../uploads', fileName));
         });
     }
+    getPhoto(request, response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const id = request.params.id;
+            try {
+                const photo = yield photosModel_1.Foto.findByPk(id);
+                response.status(200).json({ photo: photo });
+            }
+            catch (error) {
+                console.error(error);
+                response.status(500).json({ error: error });
+            }
+        });
+    }
     uploadPhoto(request, response) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {

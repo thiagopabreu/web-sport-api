@@ -39,9 +39,9 @@ class EventController {
     }
     registerEvent(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { nome_evento, descricao, data_fim } = request.body;
+            const { nome_evento, descricao, data_evento, id_categoria_fk, local, caminho_file } = request.body;
             try {
-                const newEvent = yield eventModel_1.Evento.create({ nome_evento, descricao, data_fim });
+                const newEvent = yield eventModel_1.Evento.create({ nome_evento, descricao, data_evento, id_categoria_fk, local, caminho_file });
                 newEvent.save();
                 response.status(200).json({ newEvent });
             }

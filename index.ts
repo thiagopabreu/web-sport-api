@@ -13,6 +13,9 @@ import cors from 'cors'
 import { photoRouter } from './Routes/photoRoute';
 import { relationRouter } from './Routes/relationPhotoRoute';
 import path from 'path';
+import { categoriesRouter } from './Routes/categoriesRoute';
+import { initAdminModel } from './database/models/userAdminModel';
+import { userAdminRouter } from './Routes/userAdminRouter';
 const app = express();
 
 const port = 8000;
@@ -24,7 +27,8 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 app.use('/news', newsRouter)
 app.use('/photo', photoRouter)
 app.use('/relation', relationRouter)
-
+app.use('/categories', categoriesRouter)
+app.use('/admin', userAdminRouter)
 
 app.get('/', (req: Request, res: Response) => {
     res.send("Oláa Mundo!")
@@ -41,4 +45,5 @@ export const server = app.listen(port, async () => {
     await initEventoModel();
     await initFotoModel()
     await initRelacionamentoFotoModel();
+    await initAdminModel();
 })

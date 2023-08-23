@@ -28,6 +28,9 @@ const cors_1 = __importDefault(require("cors"));
 const photoRoute_1 = require("./Routes/photoRoute");
 const relationPhotoRoute_1 = require("./Routes/relationPhotoRoute");
 const path_1 = __importDefault(require("path"));
+const categoriesRoute_1 = require("./Routes/categoriesRoute");
+const userAdminModel_1 = require("./database/models/userAdminModel");
+const userAdminRouter_1 = require("./Routes/userAdminRouter");
 const app = (0, express_1.default)();
 const port = 8000;
 app.use((0, cors_1.default)());
@@ -36,6 +39,8 @@ app.use('/uploads', express_1.default.static(path_1.default.join(__dirname, 'upl
 app.use('/news', newsRoute_1.newsRouter);
 app.use('/photo', photoRoute_1.photoRouter);
 app.use('/relation', relationPhotoRoute_1.relationRouter);
+app.use('/categories', categoriesRoute_1.categoriesRouter);
+app.use('/admin', userAdminRouter_1.userAdminRouter);
 app.get('/', (req, res) => {
     res.send("Oláa Mundo!");
 });
@@ -50,4 +55,5 @@ exports.server = app.listen(port, () => __awaiter(void 0, void 0, void 0, functi
     yield (0, eventModel_1.initEventoModel)();
     yield (0, photosModel_1.initFotoModel)();
     yield (0, photoRelationModel_1.initRelacionamentoFotoModel)();
+    yield (0, userAdminModel_1.initAdminModel)();
 }));

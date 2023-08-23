@@ -29,11 +29,12 @@ export class NewsController {
     }
 
     async registerNews(request: Request, response: Response) {
-        const {titulo, sub_conteudo, conteudo} = request.body
+        const {titulo, sub_conteudo, conteudo, id_categoria_fk} = request.body
+        console.log(id_categoria_fk)
         const data_publicacao = Date.now()
         let news
         try {
-            news = await Noticia.create({titulo, sub_conteudo ,conteudo, data_publicacao}) 
+            news = await Noticia.create({titulo, sub_conteudo ,conteudo, data_publicacao, id_categoria_fk}) 
             news.save();
             response.status(201).json(news)
         } catch(error) {

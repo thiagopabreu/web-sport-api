@@ -40,11 +40,11 @@ class TeamPositionController {
             }
         });
     }
-    registerTeam(request, response) {
+    registerTeamPosition(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { nome_time } = request.body;
+            const { nome_time, campeonato_id_fk } = request.body;
             try {
-                const newTeam = yield teamPositionModel_1.default.create({ nome_time });
+                const newTeam = yield teamPositionModel_1.default.create({ nome_time, campeonato_id_fk });
                 newTeam.save();
                 response.status(200).json({ newTeam });
             }
@@ -54,13 +54,13 @@ class TeamPositionController {
             }
         });
     }
-    updateTeam(request, response) {
+    updateTeamPosition(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const id = request.params.id;
-            const { nome_time } = request.body;
+            const { nome_time, campeonato_id_fk } = request.body;
             try {
-                const teamUpdated = yield teamPositionModel_1.default.update({ nome_time }, { where: { id: id } });
-                response.status(200).json({ teamUpdated: teamUpdated });
+                const teamPositionUpdated = yield teamPositionModel_1.default.update({ nome_time, campeonato_id_fk }, { where: { id: id } });
+                response.status(200).json({ teamUpdated: teamPositionUpdated });
             }
             catch (error) {
                 console.error(error);
@@ -72,8 +72,8 @@ class TeamPositionController {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
             try {
-                const teamDeleted = yield teamPositionModel_1.default.destroy({ where: { id: id } });
-                response.status(200).json({ teamDeleted: teamDeleted });
+                const teamPositionDeleted = yield teamPositionModel_1.default.destroy({ where: { id: id } });
+                response.status(200).json({ teamPositionDeleted: teamPositionDeleted });
             }
             catch (error) {
                 console.error(error);

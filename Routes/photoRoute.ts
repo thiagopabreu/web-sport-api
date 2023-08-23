@@ -19,6 +19,7 @@ const upload = multer({storage: storage})
 const photoController = new PhotoController();
 
 router.get('/readPhoto/:fileName', photoController.readPhoto)
+router.get('/getPhoto/:id', photoController.getPhoto)
 router.post('/registerUpload', upload.single('file'), photoController.uploadPhoto)
 router.put('/updatePhoto/:id', upload.single('file'), photoController.updatePhoto)
 router.delete('/deletePhoto/:id', photoController.deleteImage)
