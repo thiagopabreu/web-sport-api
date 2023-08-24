@@ -10,7 +10,7 @@ import { newsRouter } from './Routes/newsRoute';
 import { initFotoModel } from './database/models/photosModel';
 import { initRelacionamentoFotoModel } from './database/models/photoRelationModel';
 import cors from 'cors'
-//import { photoRouter } from './Routes/photoRoute';
+import { photoRouter } from './Routes/photoRoute';
 import { relationRouter } from './Routes/relationPhotoRoute';
 import path from 'path';
 import { categoriesRouter } from './Routes/categoriesRoute';
@@ -25,7 +25,7 @@ app.use(express.json())
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 app.use('/news', newsRouter)
-//app.use('/photo', photoRouter)
+app.use('/photo', photoRouter)
 app.use('/relation', relationRouter)
 app.use('/categories', categoriesRouter)
 app.use('/admin', userAdminRouter)
