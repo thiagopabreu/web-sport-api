@@ -5,7 +5,7 @@ import multer from "multer";
 let router = Router();
 
 const storage = multer.diskStorage({
-    destination: 'dist/uploads',
+    destination: 'uploads',
     filename: (req, file, callback) => {
         const date = Date.now()
 
