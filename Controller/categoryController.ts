@@ -44,7 +44,7 @@ export class CategoryController {
         }
     }
 
-    async updateRelation(request: Request, response: Response) {
+    async updateCategory(request: Request, response: Response) {
         const id = request.params.id
         const { nome } = request.body;
         try {
@@ -57,7 +57,7 @@ export class CategoryController {
         }
     }
 
-    async deleteRelation(request: Request, response: Response) {
+    async deleteCategory(request: Request, response: Response) {
         const {id} = request.params
 
         try {

@@ -4,10 +4,14 @@ import Categoria from './models/categoryModel';
 import Time from './models/teamModel';
 import Campeonato from './models/championshipModel';
 import PosicaoTime from './models/teamPositionModel';
+import dotenv from 'dotenv'
+dotenv.config()
 
-export const sequelize = new Sequelize('portal_regional_db', 'root', 'admin', {
-    host: '127.0.0.1',
-    port: 3306,
+
+
+export const sequelize = new Sequelize(String(process.env.DATABASE), String(process.env.USER_DATABASE), String(process.env.USER_PASSWORD), {
+    host: process.env.HOST_DATABASE,
+    port: Number(process.env.PORT_DATABASE),
     dialect: 'mysql'
 })
 

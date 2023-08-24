@@ -43,5 +43,18 @@ class UserAdminController {
             }
         });
     }
+    deleteUser(request, response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let { id } = request.params;
+            try {
+                const responseAdmin = yield userAdminModel_1.Admin.destroy({ where: { id: id } });
+                response.status(200).json({ responseAdmin });
+            }
+            catch (error) {
+                console.error(error);
+                response.status(500).json({ error });
+            }
+        });
+    }
 }
 exports.UserAdminController = UserAdminController;

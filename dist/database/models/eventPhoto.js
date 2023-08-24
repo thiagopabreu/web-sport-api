@@ -8,33 +8,37 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connectToDatabase = exports.sequelize = void 0;
+exports.initEventoModel = exports.EventoFoto = void 0;
 const sequelize_1 = require("sequelize");
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
-exports.sequelize = new sequelize_1.Sequelize(String(process.env.DATABASE), String(process.env.USER_DATABASE), String(process.env.USER_PASSWORD), {
-    host: process.env.HOST_DATABASE,
-    port: Number(process.env.PORT_DATABASE),
-    dialect: 'mysql'
-});
-function connectToDatabase() {
+const database_1 = require("../database");
+class EventoFoto extends sequelize_1.Model {
+}
+exports.EventoFoto = EventoFoto;
+function initEventoModel() {
     return __awaiter(this, void 0, void 0, function* () {
-        exports.sequelize.authenticate().then(() => {
-            console.log('Connection has been estaablishe successfully!');
+        EventoFoto.init({
+            id_event_fk: {
+                type: sequelize_1.DataTypes.BIGINT,
+                primaryKey: true,
+                allowNull: false,
+            },
+            id_photo_fk: {
+                type: sequelize_1.DataTypes.BIGINT,
+                allowNull: false
+            }
+        }, {
+            timestamps: false,
+            freezeTableName: true,
+            underscored: true,
+            tableName: 'evento_foto',
+            sequelize: database_1.sequelize
+        });
+        yield EventoFoto.sync().then(() => {
+            console.log('tabela evento_foto criada');
         }).catch((error) => {
             console.error(error);
         });
     });
 }
-exports.connectToDatabase = connectToDatabase;
-exports.sequelize.sync()
-    .then(() => {
-    console.log('Tabelas Sincronizadas com sucesso!');
-})
-    .catch((error) => {
-    console.error('Erro ao sincronizar tabelas: ', error);
-});
+exports.initEventoModel = initEventoModel;

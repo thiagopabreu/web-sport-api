@@ -29,4 +29,15 @@ export class UserAdminController {
             response.status(500).json({ error: error})
         }
     }
+
+    async deleteUser(request: Request, response: Response) {
+        let {id} = request.params
+        try {
+            const responseAdmin = await Admin.destroy({where: {id: id}})
+            response.status(200).json({responseAdmin})
+        } catch (error) {
+            console.error(error)
+            response.status(500).json({error})
+        }
+    }
 }

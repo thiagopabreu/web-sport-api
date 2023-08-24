@@ -54,7 +54,7 @@ class CategoryController {
             }
         });
     }
-    updateRelation(request, response) {
+    updateCategory(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const id = request.params.id;
             const { nome } = request.body;
@@ -68,7 +68,7 @@ class CategoryController {
             }
         });
     }
-    deleteRelation(request, response) {
+    deleteCategory(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
             try {
