@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.teamPositionsRouter = void 0;
+const express_1 = require("express");
+const teamPositionController_1 = require("../Controller/teamPositionController");
+let router = (0, express_1.Router)();
+const teamPositionController = new teamPositionController_1.TeamPositionController();
+router.get('/getTeamPositions', teamPositionController.getAllTeamPositions);
+router.get('/getTeamPosition/:id', teamPositionController.getTeamPositionById);
+router.post('/registerTeamPositions', teamPositionController.registerTeamPosition);
+router.put('/updateTeamPositions/:id', teamPositionController.updateTeamPosition);
+router.delete('/deleteTeamPositions/:id', teamPositionController.deleteTeamPosition);
+exports.teamPositionsRouter = router;

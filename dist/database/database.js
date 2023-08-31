@@ -19,7 +19,8 @@ dotenv_1.default.config();
 exports.sequelize = new sequelize_1.Sequelize(String(process.env.DATABASE), String(process.env.USER_DATABASE), String(process.env.USER_PASSWORD), {
     host: process.env.HOST_DATABASE,
     port: Number(process.env.PORT_DATABASE),
-    dialect: 'mysql'
+    dialect: 'mysql',
+    dialectModule: require('mysql2')
 });
 function connectToDatabase() {
     return __awaiter(this, void 0, void 0, function* () {

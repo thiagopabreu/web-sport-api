@@ -16,6 +16,13 @@ import path from 'path';
 import { categoriesRouter } from './Routes/categoriesRoute';
 import { initAdminModel } from './database/models/userAdminModel';
 import { userAdminRouter } from './Routes/userAdminRouter';
+import { initEventoRelacionamentoPhotoModel } from './database/models/eventRelationPhoto';
+import { eventRelationPhotoRouter } from './Routes/eventRelationPhotoRoute';
+import { eventRouter } from './Routes/eventRoute';
+import { teamsRouter } from './Routes/teamRoute';
+import { teamPositionsRouter } from './Routes/teamPositionRoute';
+import { championshipRouter } from './Routes/championshipRoute';
+import { roundsRouter } from './Routes/roundsRoute';
 const app = express();
 
 const port = 8000;
@@ -29,6 +36,12 @@ app.use('/photo', photoRouter)
 app.use('/relation', relationRouter)
 app.use('/categories', categoriesRouter)
 app.use('/admin', userAdminRouter)
+app.use('/event', eventRouter)
+app.use('/eventRelation', eventRelationPhotoRouter)
+app.use('/team', teamsRouter)
+app.use('/teamPosition', teamPositionsRouter)
+app.use('/championship', championshipRouter)
+app.use('/rounds', roundsRouter)
 
 app.get('/', (req: Request, res: Response) => {
     res.send("Oláa Mundo!")
@@ -36,14 +49,16 @@ app.get('/', (req: Request, res: Response) => {
 
 export const server = app.listen(port, async () => {
     console.log(`Servidor rodando na portaa ${port}`)
+    const force = false
     await connectToDatabase();
-    await initNoticiaModel();
-    await initCategoriaModel();
-    await initCampeonatoModel();
-    await initTimeModel();
-    await initPosicaoTimeModel();
-    await initEventoModel();
-    await initFotoModel()
-    await initRelacionamentoFotoModel();
-    await initAdminModel();
+    await initNoticiaModel(force);
+    await initCategoriaModel(force);
+    await initCampeonatoModel(force);
+    await initTimeModel(force);
+    await initPosicaoTimeModel(force);
+    await initEventoModel(force);
+    await initFotoModel(force)
+    await initRelacionamentoFotoModel(force);
+    await initAdminModel(force);
+    await initEventoRelacionamentoPhotoModel(force);
 })

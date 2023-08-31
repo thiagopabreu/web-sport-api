@@ -14,7 +14,7 @@ export class Admin extends Model {
     }
 }
 
-export async function initAdminModel() {
+export async function initAdminModel(force: boolean) {
     Admin.init({
         id: {
             type: DataTypes.BIGINT,
@@ -45,7 +45,7 @@ export async function initAdminModel() {
         user.senha = hashedPassword
     })
 
-    await Admin.sync().then(() => {
+    await Admin.sync({force: force}).then(() => {
         console.log('tabela admin-senha criada')
     }).catch((error) => {
         console.error(error)

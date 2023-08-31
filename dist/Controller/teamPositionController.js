@@ -68,7 +68,7 @@ class TeamPositionController {
             }
         });
     }
-    deleteTeam(request, response) {
+    deleteTeamPosition(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
             try {

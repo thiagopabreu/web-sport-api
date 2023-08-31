@@ -12,14 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ChampionshipController = void 0;
-const championshipModel_1 = __importDefault(require("../database/models/championshipModel"));
-class ChampionshipController {
-    getAllChampionship(request, response) {
+exports.RoundsController = void 0;
+const roundsModel_1 = __importDefault(require("../database/models/roundsModel"));
+class RoundsController {
+    getAllRounds(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const championships = yield championshipModel_1.default.findAll();
-                response.status(200).json({ championships: championships });
+                const rounds = yield roundsModel_1.default.findAll();
+                response.status(200).json({ rounds: rounds });
             }
             catch (error) {
                 console.error(error);
@@ -27,12 +27,12 @@ class ChampionshipController {
             }
         });
     }
-    getChampionshipyById(request, response) {
+    getRoundsById(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const championshipId = request.params.id;
+            const roundId = request.params.id;
             try {
-                const championship = yield championshipModel_1.default.findByPk(championshipId);
-                response.status(200).json({ championship });
+                const rounds = yield roundsModel_1.default.findByPk(roundId);
+                response.status(200).json({ rounds });
             }
             catch (error) {
                 console.error(error);
@@ -40,13 +40,13 @@ class ChampionshipController {
             }
         });
     }
-    registerCampeonato(request, response) {
+    registerRounds(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { nome_campeonato, ano_campeonato } = request.body;
+            const { id_campeonato_fk, numero_rodada } = request.body;
             try {
-                const newChampionship = yield championshipModel_1.default.create({ nome_campeonato, ano_campeonato });
-                newChampionship.save();
-                response.status(200).json({ newChampionship });
+                const newRounds = yield roundsModel_1.default.create({ id_campeonato_fk, numero_rodada });
+                newRounds.save();
+                response.status(200).json({ newRounds });
             }
             catch (error) {
                 console.error(error);
@@ -54,13 +54,13 @@ class ChampionshipController {
             }
         });
     }
-    updateChampionship(request, response) {
+    updateRounds(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const id = request.params.id;
-            const { nome_campeonato, ano_campeonato } = request.body;
+            const { id_campeonato_fk, numero_rodada } = request.body;
             try {
-                const championshipUpdate = yield championshipModel_1.default.update({ nome_campeonato, ano_campeonato }, { where: { id: id } });
-                response.status(200).json({ championshipUpdate: championshipUpdate });
+                const roundsUpdate = yield roundsModel_1.default.update({ id_campeonato_fk, numero_rodada }, { where: { id: id } });
+                response.status(200).json({ roundsUpdate });
             }
             catch (error) {
                 console.error(error);
@@ -68,12 +68,12 @@ class ChampionshipController {
             }
         });
     }
-    deleteChampionship(request, response) {
+    deleteRounds(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
             try {
-                const championshipDeleted = yield championshipModel_1.default.destroy({ where: { id: id } });
-                response.status(200).json({ championshipDeleted: championshipDeleted });
+                const roundsDeleted = yield roundsModel_1.default.destroy({ where: { id: id } });
+                response.status(200).json({ roundsDeleted });
             }
             catch (error) {
                 console.error(error);
@@ -82,4 +82,4 @@ class ChampionshipController {
         });
     }
 }
-exports.ChampionshipController = ChampionshipController;
+exports.RoundsController = RoundsController;

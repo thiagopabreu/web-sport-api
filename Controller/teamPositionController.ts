@@ -58,7 +58,7 @@ export class TeamPositionController {
         }
     }
 
-    async deleteTeam(request: Request, response: Response) {
+    async deleteTeamPosition(request: Request, response: Response) {
         const {id} = request.params
 
         try {

@@ -6,8 +6,7 @@ import PosicaoTime from "./teamPositionModel";
 export class Campeonato extends Model {
     declare id: number;
     declare nome_campeonato: string;
-    declare data_inicio: Date;
-    declare data_fim: Date;
+    declare ano_campeonato: string;
 
     static associate(models: any) {
         Campeonato.belongsToMany(models.Time,  { through: 'posicao', foreignKey: 'campeonato_id' });
@@ -15,7 +14,7 @@ export class Campeonato extends Model {
     }
 }
 
-export async function initCampeonatoModel() {
+export async function initCampeonatoModel(force: boolean) {
     Campeonato.init({
         id: {
             type: DataTypes.BIGINT,
@@ -27,12 +26,8 @@ export async function initCampeonatoModel() {
           type: DataTypes.STRING,
           allowNull: false
         },
-        data_inicio: {
-          type: DataTypes.DATE,
-          allowNull: false
-        },
-        data_fim: {
-          type: DataTypes.DATE,
+        ano_campeonato: {
+          type: DataTypes.STRING,
           allowNull: false
         }
     }, {
@@ -43,7 +38,7 @@ export async function initCampeonatoModel() {
         sequelize: sequelize
     })
 
-    await Campeonato.sync().then(() => {
+    await Campeonato.sync({force: force}).then(() => {
       console.log('tabela capeonato criada')
   }).catch((error) => {
       console.error(error)

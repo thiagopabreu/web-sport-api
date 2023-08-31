@@ -17,7 +17,7 @@ export class Noticia extends Model {
     }
 }
 
-export async function initNoticiaModel() {
+export async function initNoticiaModel(force: boolean) {
     Noticia.init(
     {
         id: {
@@ -63,7 +63,7 @@ export async function initNoticiaModel() {
 
     //Noticia.associate({ Categoria })
 
-    await Noticia.sync({force: false}).then(() => {
+    await Noticia.sync({force: force}).then(() => {
         console.log('tabela noticia criada')
     }).catch((error) => {
         console.error(error)

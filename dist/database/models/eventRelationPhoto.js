@@ -8,39 +8,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.initAdminModel = exports.Admin = void 0;
+exports.initEventoRelacionamentoPhotoModel = exports.EventoRelacionamentoPhoto = void 0;
 const sequelize_1 = require("sequelize");
 const database_1 = require("../database");
-const bcrypt_1 = __importDefault(require("bcrypt"));
-class Admin extends sequelize_1.Model {
-    comparePassword(password, passwordBD) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const result = yield bcrypt_1.default.compare(password, passwordBD);
-            console.log(result);
-            return result;
-        });
-    }
+class EventoRelacionamentoPhoto extends sequelize_1.Model {
 }
-exports.Admin = Admin;
-function initAdminModel(force) {
+exports.EventoRelacionamentoPhoto = EventoRelacionamentoPhoto;
+function initEventoRelacionamentoPhotoModel(force) {
     return __awaiter(this, void 0, void 0, function* () {
-        Admin.init({
-            id: {
+        EventoRelacionamentoPhoto.init({
+            id_event_fk: {
                 type: sequelize_1.DataTypes.BIGINT,
                 primaryKey: true,
-                allowNull: false,
-                autoIncrement: true
+                allowNull: false
             },
-            user: {
-                type: sequelize_1.DataTypes.STRING,
-                allowNull: false,
-                unique: true
-            },
-            senha: {
+            id_foto_fk: {
                 type: sequelize_1.DataTypes.STRING,
                 allowNull: false
             }
@@ -48,18 +31,14 @@ function initAdminModel(force) {
             timestamps: false,
             freezeTableName: true,
             underscored: true,
-            tableName: 'admin-senha',
+            tableName: 'relacionamento_evento_foto',
             sequelize: database_1.sequelize
         });
-        Admin.beforeCreate((user) => __awaiter(this, void 0, void 0, function* () {
-            const hashedPassword = yield bcrypt_1.default.hash(user.senha, 10);
-            user.senha = hashedPassword;
-        }));
-        yield Admin.sync({ force: force }).then(() => {
-            console.log('tabela admin-senha criada');
+        yield EventoRelacionamentoPhoto.sync({ force: force }).then(() => {
+            console.log('tabela relacionamento_evento_foto criada');
         }).catch((error) => {
             console.error(error);
         });
     });
 }
-exports.initAdminModel = initAdminModel;
+exports.initEventoRelacionamentoPhotoModel = initEventoRelacionamentoPhotoModel;

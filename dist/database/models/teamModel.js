@@ -19,7 +19,7 @@ class Time extends sequelize_1.Model {
     }
 }
 exports.Time = Time;
-function initTimeModel() {
+function initTimeModel(force) {
     return __awaiter(this, void 0, void 0, function* () {
         Time.init({
             id: {
@@ -39,7 +39,7 @@ function initTimeModel() {
             tableName: 'time',
             sequelize: database_1.sequelize
         });
-        yield Time.sync().then(() => {
+        yield Time.sync({ force: force }).then(() => {
             console.log('tabela time criada');
         }).catch((error) => {
             console.error(error);

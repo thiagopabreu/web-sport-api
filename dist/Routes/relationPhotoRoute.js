@@ -6,5 +6,8 @@ const relationPhotoController_1 = require("../Controller/relationPhotoController
 const router = (0, express_1.Router)();
 const relationPhotoController = new relationPhotoController_1.RelationPhotoController();
 router.get('/getRelation/:idNews', relationPhotoController.getRelationPhotoById);
+router.get('/getRelations', relationPhotoController.getAllRelations);
 router.post('/registerRelation', relationPhotoController.registerRelation);
+router.put('/updateRelation/:idNews', relationPhotoController.updateRelation);
+router.delete('/deleteRelation/:idNews');
 exports.relationRouter = router;

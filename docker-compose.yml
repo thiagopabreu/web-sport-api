@@ -1,0 +1,26 @@
+version: '3'
+services:
+  node:
+    build: .
+    command: "npm run dev"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    expose: 
+      - "3000"
+    ports:
+      - "3000:3000"
+  db:
+    image: mysql:5.7
+    container_name: my-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_DATABASE: portal_regional_db
+      MYSQL_PASSWORD: 'admin'
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

@@ -12,7 +12,7 @@ export class Categoria extends Model {
     }
 }
 
-export async function initCategoriaModel() {
+export async function initCategoriaModel(force: boolean) {
     Categoria.init({
         id: {
             type: DataTypes.BIGINT,
@@ -35,7 +35,7 @@ export async function initCategoriaModel() {
 
     //Categoria.associate({ Noticia, Evento })
 
-    await Categoria.sync().then(() => {
+    await Categoria.sync({force: force}).then(() => {
         console.log('tabela categoria criada')
     }).catch((error) => {
         console.error(error)

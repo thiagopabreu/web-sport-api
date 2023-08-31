@@ -13,7 +13,7 @@ export class Time extends Model {
     }
 }
 
-export async function initTimeModel() {
+export async function initTimeModel(force: boolean) {
     Time.init({
         id: {
             type: DataTypes.BIGINT,
@@ -34,7 +34,7 @@ export async function initTimeModel() {
         sequelize: sequelize
     })
 
-    await Time.sync().then(() => {
+    await Time.sync({force: force}).then(() => {
         console.log('tabela time criada')
     }).catch((error) => {
         console.error(error)

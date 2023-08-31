@@ -19,7 +19,7 @@ class Campeonato extends sequelize_1.Model {
     }
 }
 exports.Campeonato = Campeonato;
-function initCampeonatoModel() {
+function initCampeonatoModel(force) {
     return __awaiter(this, void 0, void 0, function* () {
         Campeonato.init({
             id: {
@@ -32,12 +32,8 @@ function initCampeonatoModel() {
                 type: sequelize_1.DataTypes.STRING,
                 allowNull: false
             },
-            data_inicio: {
-                type: sequelize_1.DataTypes.DATE,
-                allowNull: false
-            },
-            data_fim: {
-                type: sequelize_1.DataTypes.DATE,
+            ano_campeonato: {
+                type: sequelize_1.DataTypes.STRING,
                 allowNull: false
             }
         }, {
@@ -47,7 +43,7 @@ function initCampeonatoModel() {
             tableName: 'campeonato',
             sequelize: database_1.sequelize
         });
-        yield Campeonato.sync().then(() => {
+        yield Campeonato.sync({ force: force }).then(() => {
             console.log('tabela capeonato criada');
         }).catch((error) => {
             console.error(error);

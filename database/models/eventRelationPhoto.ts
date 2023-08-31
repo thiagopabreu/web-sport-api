@@ -1,15 +1,17 @@
+
+
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../database";
 
 
-export class RelacionamentoFoto extends Model {
-    declare id_news_fk: number;
+export class EventoRelacionamentoPhoto extends Model {
+    declare id_event_fk: number;
     declare id_foto_fk: number;
 }
 
-export async function initRelacionamentoFotoModel(force: boolean) {
-    RelacionamentoFoto.init({
-        id_news_fk: {
+export async function initEventoRelacionamentoPhotoModel(force: boolean) {
+    EventoRelacionamentoPhoto.init({
+        id_event_fk: {
             type: DataTypes.BIGINT,
             primaryKey: true,
             allowNull: false
@@ -23,12 +25,12 @@ export async function initRelacionamentoFotoModel(force: boolean) {
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        tableName: 'relacionamento_foto',
+        tableName: 'relacionamento_evento_foto',
         sequelize: sequelize
     })
 
-    await RelacionamentoFoto.sync({force: force}).then(() => {
-        console.log('tabela relacionamento_foto criada')
+    await EventoRelacionamentoPhoto.sync({force: force}).then(() => {
+        console.log('tabela relacionamento_evento_foto criada')
     }).catch((error) => {
         console.error(error)
     })

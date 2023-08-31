@@ -18,7 +18,7 @@ class Evento extends sequelize_1.Model {
     }
 }
 exports.Evento = Evento;
-function initEventoModel() {
+function initEventoModel(force) {
     return __awaiter(this, void 0, void 0, function* () {
         Evento.init({
             id: {
@@ -46,10 +46,6 @@ function initEventoModel() {
             local: {
                 type: sequelize_1.DataTypes.TEXT,
                 allowNull: false
-            },
-            caminho_file: {
-                type: sequelize_1.DataTypes.TEXT,
-                allowNull: false
             }
         }, {
             timestamps: false,
@@ -58,7 +54,7 @@ function initEventoModel() {
             tableName: 'evento',
             sequelize: database_1.sequelize
         });
-        yield Evento.sync().then(() => {
+        yield Evento.sync({ force: force }).then(() => {
             console.log('tabela evento criada');
         }).catch((error) => {
             console.error(error);

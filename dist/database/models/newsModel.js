@@ -19,7 +19,7 @@ class Noticia extends sequelize_1.Model {
     }
 }
 exports.Noticia = Noticia;
-function initNoticiaModel() {
+function initNoticiaModel(force) {
     return __awaiter(this, void 0, void 0, function* () {
         Noticia.init({
             id: {
@@ -60,7 +60,7 @@ function initNoticiaModel() {
             }
         });
         //Noticia.associate({ Categoria })
-        yield Noticia.sync({ force: false }).then(() => {
+        yield Noticia.sync({ force: force }).then(() => {
             console.log('tabela noticia criada');
         }).catch((error) => {
             console.error(error);

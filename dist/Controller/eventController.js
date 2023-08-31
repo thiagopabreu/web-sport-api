@@ -39,9 +39,9 @@ class EventController {
     }
     registerEvent(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { nome_evento, descricao, data_evento, id_categoria_fk, local, caminho_file } = request.body;
+            const { nome_evento, descricao, data_evento, id_categoria_fk, local } = request.body;
             try {
-                const newEvent = yield eventModel_1.Evento.create({ nome_evento, descricao, data_evento, id_categoria_fk, local, caminho_file });
+                const newEvent = yield eventModel_1.Evento.create({ nome_evento, descricao, data_evento, id_categoria_fk, local });
                 newEvent.save();
                 response.status(200).json({ newEvent });
             }
@@ -65,7 +65,7 @@ class EventController {
             }
         });
     }
-    deleteChampionship(request, response) {
+    deleteEvent(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
             try {

@@ -7,6 +7,12 @@ const router = Router()
 
 const relationPhotoController = new RelationPhotoController()
 router.get('/getRelation/:idNews', relationPhotoController.getRelationPhotoById)
+router.get('/getRelations', relationPhotoController.getAllRelations)
+
 router.post('/registerRelation', relationPhotoController.registerRelation)
+
+router.put('/updateRelation/:idNews', relationPhotoController.updateRelation)
+
+router.delete('/deleteRelation/:idNews')
 
 export const relationRouter = router;

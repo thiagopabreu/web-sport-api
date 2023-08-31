@@ -15,7 +15,7 @@ const database_1 = require("../database");
 class Foto extends sequelize_1.Model {
 }
 exports.Foto = Foto;
-function initFotoModel() {
+function initFotoModel(force) {
     return __awaiter(this, void 0, void 0, function* () {
         Foto.init({
             id: {
@@ -35,7 +35,7 @@ function initFotoModel() {
             tableName: 'foto',
             sequelize: database_1.sequelize
         });
-        yield Foto.sync({ force: false }).then(() => {
+        yield Foto.sync({ force: force }).then(() => {
             console.log('tabela foto criada');
         }).catch((error) => {
             console.error(error);

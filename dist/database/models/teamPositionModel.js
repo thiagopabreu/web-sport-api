@@ -19,7 +19,7 @@ class PosicaoTime extends sequelize_1.Model {
     }
 }
 exports.PosicaoTime = PosicaoTime;
-function initPosicaoTimeModel() {
+function initPosicaoTimeModel(force) {
     return __awaiter(this, void 0, void 0, function* () {
         PosicaoTime.init({
             id: {
@@ -43,7 +43,7 @@ function initPosicaoTimeModel() {
             tableName: 'posicao_time',
             sequelize: database_1.sequelize
         });
-        yield PosicaoTime.sync({ force: false }).then(() => {
+        yield PosicaoTime.sync({ force: force }).then(() => {
             console.log('tabela posicao_time criada');
         }).catch((error) => {
             console.error(error);

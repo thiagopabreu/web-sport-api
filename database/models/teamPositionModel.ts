@@ -13,7 +13,7 @@ export class PosicaoTime extends Model {
     }
 }
 
-export async function initPosicaoTimeModel() {
+export async function initPosicaoTimeModel(force: boolean) {
     PosicaoTime.init({
         id: {
             type: DataTypes.BIGINT,
@@ -37,7 +37,7 @@ export async function initPosicaoTimeModel() {
         sequelize: sequelize
     })
 
-    await PosicaoTime.sync({force: false}).then(() => {
+    await PosicaoTime.sync({force: force}).then(() => {
         console.log('tabela posicao_time criada')
     }).catch((error) => {
         console.error(error)

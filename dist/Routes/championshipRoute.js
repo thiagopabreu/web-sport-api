@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.championshipRouter = void 0;
+const express_1 = require("express");
+const championshipModel_1 = require("../Controller/championshipModel");
+let router = (0, express_1.Router)();
+const championshipController = new championshipModel_1.ChampionshipController();
+router.get('/getChampionships', championshipController.getAllChampionship);
+router.get('/getChampionship/:id', championshipController.getChampionshipyById);
+router.post('/registerChampionship', championshipController.registerCampeonato);
+router.put('/updateChampionship/:id', championshipController.updateChampionship);
+router.delete('/deleteNews/:id', championshipController.deleteChampionship);
+exports.championshipRouter = router;

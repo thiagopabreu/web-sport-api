@@ -9,14 +9,13 @@ export class Evento extends Model {
     declare data_evento: Date;
     declare id_categoria_fk: number;
     declare local: string;
-    declare caminho_file: string;
     
     static associate(models: any) {
         Evento.belongsTo(models.Categoria, { foreignKey: 'categoria_id' });
     }
 }
 
-export async function initEventoModel() {
+export async function initEventoModel(force: boolean) {
     Evento.init({
             id: {
         type: DataTypes.BIGINT,
@@ -43,10 +42,6 @@ export async function initEventoModel() {
     local: {
       type: DataTypes.TEXT,
       allowNull: false
-    },
-    caminho_file: {
-      type: DataTypes.TEXT,
-      allowNull: false
     }
 },
 {
@@ -58,7 +53,7 @@ export async function initEventoModel() {
 }
     )
 
-    await Evento.sync().then(() => {
+    await Evento.sync({force: force}).then(() => {
       console.log('tabela evento criada')
   }).catch((error) => {
       console.error(error)

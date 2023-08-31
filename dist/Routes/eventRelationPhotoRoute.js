@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.eventRelationPhotoRouter = void 0;
+const express_1 = require("express");
+const eventRelationPhoto_1 = require("../Controller/eventRelationPhoto");
+const router = (0, express_1.Router)();
+const relationPhotoController = new eventRelationPhoto_1.EventoRelacionamentoPhotoController();
+router.get('/getRelation/:idEvent', relationPhotoController.getEventoRelacionamento);
+router.get('/getRelations', relationPhotoController.getAllRelations);
+router.post('/registerRelation', relationPhotoController.registerRelation);
+router.put('/updateRelation', relationPhotoController.updateRelation);
+router.delete('/deleteRelation/:idEvent', relationPhotoController.deleteRelation);
+exports.eventRelationPhotoRouter = router;

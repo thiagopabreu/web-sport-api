@@ -7,7 +7,7 @@ export class Foto extends Model {
     declare caminho: string
 }
 
-export async function initFotoModel() {
+export async function initFotoModel(force: boolean) {
     Foto.init({
         id: {
             type: DataTypes.BIGINT,
@@ -28,7 +28,7 @@ export async function initFotoModel() {
         sequelize: sequelize
     })
 
-    await Foto.sync({force: false}).then(() => {
+    await Foto.sync({force: force}).then(() => {
         console.log('tabela foto criada')
     }).catch((error) => {
         console.error(error)

@@ -31,10 +31,10 @@ export class ChampionshipController {
 
     async registerCampeonato(request: Request, response: Response) {
         
-        const { nome_campeonato, data_inicio, data_fim } = request.body;
+        const { nome_campeonato, ano_campeonato } = request.body;
 
         try {
-            const newChampionship = await Campeonato.create({nome_campeonato, data_inicio, data_fim})
+            const newChampionship = await Campeonato.create({nome_campeonato, ano_campeonato})
             newChampionship.save();
 
             response.status(200).json({newChampionship})
@@ -46,9 +46,9 @@ export class ChampionshipController {
 
     async updateChampionship(request: Request, response: Response) {
         const id = request.params.id
-        const { nome_campeonato, data_inicio, data_fim } = request.body;
+        const { nome_campeonato, ano_campeonato } = request.body;
         try {
-            const championshipUpdate = await Campeonato.update({nome_campeonato, data_inicio, data_fim}, {where:{ id: id}})
+            const championshipUpdate = await Campeonato.update({nome_campeonato, ano_campeonato}, {where:{ id: id}})
 
             response.status(200).json({championshipUpdate: championshipUpdate})
         } catch (error) {

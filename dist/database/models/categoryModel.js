@@ -19,7 +19,7 @@ class Categoria extends sequelize_1.Model {
     }
 }
 exports.Categoria = Categoria;
-function initCategoriaModel() {
+function initCategoriaModel(force) {
     return __awaiter(this, void 0, void 0, function* () {
         Categoria.init({
             id: {
@@ -40,7 +40,7 @@ function initCategoriaModel() {
             sequelize: database_1.sequelize
         });
         //Categoria.associate({ Noticia, Evento })
-        yield Categoria.sync().then(() => {
+        yield Categoria.sync({ force: force }).then(() => {
             console.log('tabela categoria criada');
         }).catch((error) => {
             console.error(error);
