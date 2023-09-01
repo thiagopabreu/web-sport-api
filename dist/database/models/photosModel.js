@@ -27,6 +27,10 @@ function initFotoModel(force) {
             caminho: {
                 type: sequelize_1.DataTypes.STRING,
                 allowNull: false
+            },
+            imagem_data: {
+                type: sequelize_1.DataTypes.BLOB('long'),
+                allowNull: false
             }
         }, {
             timestamps: false,

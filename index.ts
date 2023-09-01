@@ -53,7 +53,7 @@ app.get('/', (req: Request, res: Response) => {
 
 export const server = app.listen(port, async () => {
     console.log(`Servidor rodando na portaa ${port}`)
-    const force = true
+    const force = false
     await connectToDatabase();
     await initNoticiaModel(force);
     await initCategoriaModel(false);

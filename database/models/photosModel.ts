@@ -4,7 +4,8 @@ import { sequelize } from "../database";
 
 export class Foto extends Model {
     declare id: number;
-    declare caminho: string
+    declare caminho: string;
+    declare imagem_data: string;
 }
 
 export async function initFotoModel(force: boolean) {
@@ -17,6 +18,10 @@ export async function initFotoModel(force: boolean) {
         },
         caminho: {
             type: DataTypes.STRING,
+            allowNull: false
+        },
+        imagem_data: {
+            type: DataTypes.BLOB('long'),
             allowNull: false
         }
     }, 
