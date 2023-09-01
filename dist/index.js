@@ -63,10 +63,10 @@ app.get('/', (req, res) => {
 });
 exports.server = app.listen(port, () => __awaiter(void 0, void 0, void 0, function* () {
     console.log(`Servidor rodando na portaa ${port}`);
-    const force = false;
+    const force = true;
     yield (0, database_1.connectToDatabase)();
     yield (0, newsModel_1.initNoticiaModel)(force);
-    yield (0, categoryModel_1.initCategoriaModel)(force);
+    yield (0, categoryModel_1.initCategoriaModel)(false);
     yield (0, championshipModel_1.initCampeonatoModel)(force);
     yield (0, teamModel_1.initTimeModel)(force);
     yield (0, teamPositionModel_1.initPosicaoTimeModel)(force);

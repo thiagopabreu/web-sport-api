@@ -53,11 +53,11 @@ app.get('/', (req: Request, res: Response) => {
 
 export const server = app.listen(port, async () => {
     console.log(`Servidor rodando na portaa ${port}`)
-    const force = false
+    const force = true
     await connectToDatabase();
     await initNoticiaModel(force);
-    await initCategoriaModel(force);
-    await initCampeonatoModel(!force);
+    await initCategoriaModel(false);
+    await initCampeonatoModel(force);
     await initTimeModel(force);
     await initPosicaoTimeModel(force);
     await initEventoModel(force);
