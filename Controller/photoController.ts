@@ -61,14 +61,12 @@ export class PhotoController {
     async updatePhoto(request: Request, response: Response) {
         const photoId = request.params.id;
         const file: any = request.file?.filename
-        const uploadsPath = path.join(__dirname, '../uploads')
+        const uploadsPath = `/uploads/${file}`
         try {
-            const oldFile : any = await Foto.findByPk(photoId);
-            const oldImagePath = path.join(uploadsPath, oldFile.caminho)
-            await fs.unlink(oldImagePath).then(async () => {
-                await Foto.update({caminho: file}, {where: {id: photoId}})
-                
-                response.status(200).json({message: 'Imagem atualizada'})  
+            const imageBuffer = await fs.readFile(uploadsPath)
+            const imageUpdated = await Foto.update({caminho: uploadsPath, imagem_data: imageBuffer}, {where: {id: photoId}})
+            await fs.unlink(uploadsPath).then(async () => {
+                response.status(200).json({message: 'Imagem atualizada', imageUpdated})  
             })
                           
         } catch (error) {
