@@ -34,7 +34,7 @@ export class PhotoController {
         try {
             console.log('entrei aqui')
             const uploadedFileName = request.file?.filename;
-            const imagePath = `../noticia-esporte-back/dist/uploads/${uploadedFileName}`
+            const imagePath = `/uploads/${uploadedFileName}`
 
             const imageBuffer = await fs.readFile(imagePath)
             console.log(imageBuffer)
