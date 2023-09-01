@@ -13,6 +13,6 @@ router.post('/registerChampionship', championshipController.registerCampeonato)
 
 router.put('/updateChampionship/:id', championshipController.updateChampionship)
 
-router.delete('/deleteNews/:id', championshipController.deleteChampionship)
+router.delete('/deleteChampionship/:id', championshipController.deleteChampionship)
 
 export const championshipRouter = router;

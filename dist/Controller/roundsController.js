@@ -40,6 +40,21 @@ class RoundsController {
             }
         });
     }
+    getRoundByChampionshipId(request, response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const championshipId = request.params.id;
+            try {
+                const responseRounds = yield roundsModel_1.default.findAll({ where: {
+                        id_campeonato_fk: championshipId
+                    } });
+                response.status(200).json(responseRounds);
+            }
+            catch (error) {
+                console.error(error);
+                response.status(500).json(error);
+            }
+        });
+    }
     registerRounds(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id_campeonato_fk, numero_rodada } = request.body;

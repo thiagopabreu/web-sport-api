@@ -37,6 +37,10 @@ const eventRoute_1 = require("./Routes/eventRoute");
 const teamRoute_1 = require("./Routes/teamRoute");
 const teamPositionRoute_1 = require("./Routes/teamPositionRoute");
 const championshipRoute_1 = require("./Routes/championshipRoute");
+const roundsRoute_1 = require("./Routes/roundsRoute");
+const roundsModel_1 = require("./database/models/roundsModel");
+const gamesModel_1 = require("./database/models/gamesModel");
+const gamesRoute_1 = require("./Routes/gamesRoute");
 const app = (0, express_1.default)();
 const port = 8000;
 app.use((0, cors_1.default)());
@@ -52,6 +56,8 @@ app.use('/eventRelation', eventRelationPhotoRoute_1.eventRelationPhotoRouter);
 app.use('/team', teamRoute_1.teamsRouter);
 app.use('/teamPosition', teamPositionRoute_1.teamPositionsRouter);
 app.use('/championship', championshipRoute_1.championshipRouter);
+app.use('/rounds', roundsRoute_1.roundsRouter);
+app.use('/games', gamesRoute_1.gameRouter);
 app.get('/', (req, res) => {
     res.send("Oláa Mundo!");
 });
@@ -69,4 +75,6 @@ exports.server = app.listen(port, () => __awaiter(void 0, void 0, void 0, functi
     yield (0, photoRelationModel_1.initRelacionamentoFotoModel)(force);
     yield (0, userAdminModel_1.initAdminModel)(force);
     yield (0, eventRelationPhoto_1.initEventoRelacionamentoPhotoModel)(force);
+    yield (0, roundsModel_1.initRodadasModel)(force);
+    yield (0, gamesModel_1.initJogoModel)(force);
 }));

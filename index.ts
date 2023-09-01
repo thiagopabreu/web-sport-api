@@ -23,6 +23,9 @@ import { teamsRouter } from './Routes/teamRoute';
 import { teamPositionsRouter } from './Routes/teamPositionRoute';
 import { championshipRouter } from './Routes/championshipRoute';
 import { roundsRouter } from './Routes/roundsRoute';
+import { initRodadasModel } from './database/models/roundsModel';
+import { initJogoModel } from './database/models/gamesModel';
+import { gameRouter } from './Routes/gamesRoute';
 const app = express();
 
 const port = 8000;
@@ -42,6 +45,7 @@ app.use('/team', teamsRouter)
 app.use('/teamPosition', teamPositionsRouter)
 app.use('/championship', championshipRouter)
 app.use('/rounds', roundsRouter)
+app.use('/games', gameRouter)
 
 app.get('/', (req: Request, res: Response) => {
     res.send("Oláa Mundo!")
@@ -61,4 +65,6 @@ export const server = app.listen(port, async () => {
     await initRelacionamentoFotoModel(force);
     await initAdminModel(force);
     await initEventoRelacionamentoPhotoModel(force);
+    await initRodadasModel(force);
+    await initJogoModel(force);
 })

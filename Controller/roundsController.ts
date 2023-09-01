@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import Rounds from '../database/models/roundsModel'
+import Rounds, { Rodadas } from '../database/models/roundsModel'
+import Campeonato from "../database/models/championshipModel";
 
 
 export class RoundsController {
@@ -28,6 +29,19 @@ export class RoundsController {
         }
     }
 
+    async getRoundByChampionshipId(request: Request, response: Response) {
+        const championshipId = request.params.id
+
+        try {
+            const responseRounds = await Rounds.findAll({where: {
+                id_campeonato_fk: championshipId
+            }})
+            response.status(200).json(responseRounds)
+        } catch (error) {
+            console.error(error)
+            response.status(500).json(error)
+        }
+    }
 
     async registerRounds(request: Request, response: Response) {
         

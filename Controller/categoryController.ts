@@ -31,10 +31,10 @@ export class CategoryController {
 
     async registerCategory(request: Request, response: Response) {
         
-        const { id, nome } = request.body;
+        const { nome } = request.body;
 
         try {
-            const newCategory = await Categoria.create({id, nome})
+            const newCategory = await Categoria.create({nome})
             newCategory.save();
 
             response.status(200).json({newCategory})

@@ -8,11 +8,12 @@ const roundsController = new RoundsController()
 
 router.get('/getRounds', roundsController.getAllRounds)
 router.get('/getARound/:id', roundsController.getRoundsById)
+router.get('/getRoundByChampionshipId/:id', roundsController.getRoundByChampionshipId)
 
 router.post('/registerRound', roundsController.registerRounds)
 
 router.put('/updateRound/:id', roundsController.updateRounds)
 
-router.delete('deleteRound/:id', roundsController.deleteRounds)
+router.delete('/deleteRound/:id', roundsController.deleteRounds)
 
 export const roundsRouter = router;

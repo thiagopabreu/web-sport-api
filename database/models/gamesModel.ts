@@ -23,19 +23,43 @@ export async function initJogoModel(force: boolean) {
             allowNull: false,
             autoIncrement: true
         },
-        id_campeonato_fk: {
+        id_rodada_fk: {
+          type: DataTypes.BIGINT,
+          allowNull: false
+        },
+        data: {
           type: DataTypes.STRING,
           allowNull: false
         },
-        numero_rodada: {
-          type: DataTypes.BIGINT,
-          allowNull: false
+        hora: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        local: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        mandante: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        placar_mandante: {
+            type: DataTypes.BIGINT,
+            allowNull: false
+        },
+        visitante: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        placar_visitante: {
+            type: DataTypes.BIGINT,
+            allowNull: false
         }
     }, {
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        tableName: 'rodadas',
+        tableName: 'jogos',
         sequelize: sequelize
     })
 

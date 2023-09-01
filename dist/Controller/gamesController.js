@@ -12,14 +12,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CategoryController = void 0;
-const categoryModel_1 = __importDefault(require("../database/models/categoryModel"));
-class CategoryController {
-    getAllCategorys(request, response) {
+exports.GameController = void 0;
+const gamesModel_1 = __importDefault(require("../database/models/gamesModel"));
+class GameController {
+    getAllGames(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const categorys = yield categoryModel_1.default.findAll();
-                response.status(200).json({ categories: categorys });
+                const games = yield gamesModel_1.default.findAll();
+                response.status(200).json({ games: games });
             }
             catch (error) {
                 console.error(error);
@@ -27,12 +27,12 @@ class CategoryController {
             }
         });
     }
-    getCategoryById(request, response) {
+    getGameById(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const categoryId = request.params.id;
+            const gameId = request.params.id;
             try {
-                const category = yield categoryModel_1.default.findByPk(categoryId);
-                response.status(200).json({ category });
+                const game = yield gamesModel_1.default.findByPk(gameId);
+                response.status(200).json({ game });
             }
             catch (error) {
                 console.error(error);
@@ -40,13 +40,28 @@ class CategoryController {
             }
         });
     }
-    registerCategory(request, response) {
+    getGameByRound(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { nome } = request.body;
+            const roundId = request.params.id;
             try {
-                const newCategory = yield categoryModel_1.default.create({ nome });
-                newCategory.save();
-                response.status(200).json({ newCategory });
+                const game = yield gamesModel_1.default.findAll({ where: {
+                        id_rodada_fk: roundId
+                    } });
+                response.status(200).json(game);
+            }
+            catch (error) {
+                console.error(error);
+                response.status(500);
+            }
+        });
+    }
+    registerGame(request, response) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id_rodada_fk, data, hora, local, mandante, placar_mandante, visitante, placar_visitante } = request.body;
+            try {
+                const newGame = yield gamesModel_1.default.create({ id_rodada_fk, data, hora, local, mandante, placar_mandante, visitante, placar_visitante });
+                newGame.save();
+                response.status(200).json({ newGame });
             }
             catch (error) {
                 console.error(error);
@@ -54,13 +69,13 @@ class CategoryController {
             }
         });
     }
-    updateCategory(request, response) {
+    updateGame(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const id = request.params.id;
-            const { nome } = request.body;
+            const { id_rodada_fk, data, hora, local, mandante, placar_mandante, visitante, placar_visitante } = request.body;
             try {
-                const categoryUpdate = yield categoryModel_1.default.update({ nome }, { where: { id: id } });
-                response.status(200).json({ relation: categoryUpdate });
+                const gameUpdate = yield gamesModel_1.default.update({ id_rodada_fk, data, hora, local, mandante, placar_mandante, visitante, placar_visitante }, { where: { id: id } });
+                response.status(200).json({ gameUpdate: gameUpdate });
             }
             catch (error) {
                 console.error(error);
@@ -68,12 +83,12 @@ class CategoryController {
             }
         });
     }
-    deleteCategory(request, response) {
+    deleteGame(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = request.params;
             try {
-                const categoryDeleted = yield categoryModel_1.default.destroy({ where: { id: id } });
-                response.status(200).json({ categoryDeleted: categoryDeleted });
+                const gameDeleted = yield gamesModel_1.default.destroy({ where: { id: id } });
+                response.status(200).json({ gameDeleted: gameDeleted });
             }
             catch (error) {
                 console.error(error);
@@ -82,4 +97,4 @@ class CategoryController {
         });
     }
 }
-exports.CategoryController = CategoryController;
+exports.GameController = GameController;

@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.roundsRouter = void 0;
+const express_1 = require("express");
+const roundsController_1 = require("../Controller/roundsController");
+let router = (0, express_1.Router)();
+const roundsController = new roundsController_1.RoundsController();
+router.get('/getRounds', roundsController.getAllRounds);
+router.get('/getARound/:id', roundsController.getRoundsById);
+router.get('/getRoundByChampionshipId/:id', roundsController.getRoundByChampionshipId);
+router.post('/registerRound', roundsController.registerRounds);
+router.put('/updateRound/:id', roundsController.updateRounds);
+router.delete('/deleteRound/:id', roundsController.deleteRounds);
+exports.roundsRouter = router;
