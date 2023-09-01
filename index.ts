@@ -57,7 +57,7 @@ export const server = app.listen(port, async () => {
     await connectToDatabase();
     await initNoticiaModel(force);
     await initCategoriaModel(force);
-    await initCampeonatoModel(force);
+    await initCampeonatoModel(!force);
     await initTimeModel(force);
     await initPosicaoTimeModel(force);
     await initEventoModel(force);
