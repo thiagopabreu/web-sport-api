@@ -57,9 +57,9 @@ class NewsController {
     updateNews(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const newsId = request.params.id;
-            const { titulo, conteudo } = request.body;
+            const { titulo, conteudo, sub_conteudo, id_categoria_fk } = request.body;
             try {
-                let newsUpdated = newsModel_1.Noticia.update({ titulo: titulo, conteudo: conteudo }, { where: { id: newsId } });
+                let newsUpdated = yield newsModel_1.Noticia.update({ titulo: titulo, conteudo: conteudo, sub_conteudo: sub_conteudo, id_categoria_fk: id_categoria_fk }, { where: { id: newsId } });
                 response.status(200).json({ newsUpdated });
             }
             catch (error) {
@@ -71,9 +71,10 @@ class NewsController {
     deleteNews(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const newsId = request.params.id;
-            const { titulo, conteudo } = request.body;
+            console.log(newsId);
             try {
-                let newsDeleted = newsModel_1.Noticia.destroy({ where: { id: newsId } });
+                let newsDeleted = yield newsModel_1.Noticia.destroy({ where: { id: newsId } });
+                console.log(newsDeleted);
                 response.status(200).json({ newsDeleted });
             }
             catch (error) {

@@ -45,10 +45,10 @@ export class RelationPhotoController {
     }
 
     async updateRelation(request: Request, response: Response) {
-        const id_news_fk = request.body.id_news_fk;
+        const id_event_fk = request.body.id_event_fk;
         const id_foto_fk: number = request.body.id_foto_fk;
         try {
-            const relation = await RelacionamentoFoto.update({id_foto_fk: id_foto_fk}, {where:{ id_news_fk: id_news_fk}})
+            const relation = await RelacionamentoFoto.update({id_foto_fk: id_foto_fk}, {where:{ id_event_fk: id_event_fk}})
 
             response.status(200).json({relation: relation})
         } catch (error) {
@@ -58,10 +58,10 @@ export class RelationPhotoController {
     }
 
     async deleteRelation(request: Request, response: Response) {
-        const {id_news_fk} = request.params
+        const {id} = request.params
 
         try {
-            const relationDeleted = await RelacionamentoFoto.destroy({where: { id_news_fk: id_news_fk}})
+            const relationDeleted = await RelacionamentoFoto.destroy({where: { id_news_fk: id}})
 
             response.status(200).json({relationDeleted: relationDeleted})
         } catch (error) {

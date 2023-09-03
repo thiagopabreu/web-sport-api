@@ -55,10 +55,10 @@ class RelationPhotoController {
     }
     updateRelation(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const id_news_fk = request.body.id_news_fk;
+            const id_event_fk = request.body.id_event_fk;
             const id_foto_fk = request.body.id_foto_fk;
             try {
-                const relation = yield photoRelationModel_1.RelacionamentoFoto.update({ id_foto_fk: id_foto_fk }, { where: { id_news_fk: id_news_fk } });
+                const relation = yield photoRelationModel_1.RelacionamentoFoto.update({ id_foto_fk: id_foto_fk }, { where: { id_event_fk: id_event_fk } });
                 response.status(200).json({ relation: relation });
             }
             catch (error) {
@@ -69,9 +69,9 @@ class RelationPhotoController {
     }
     deleteRelation(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { id_news_fk } = request.params;
+            const { id } = request.params;
             try {
-                const relationDeleted = yield photoRelationModel_1.RelacionamentoFoto.destroy({ where: { id_news_fk: id_news_fk } });
+                const relationDeleted = yield photoRelationModel_1.RelacionamentoFoto.destroy({ where: { id_news_fk: id } });
                 response.status(200).json({ relationDeleted: relationDeleted });
             }
             catch (error) {

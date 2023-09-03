@@ -45,9 +45,9 @@ export class NewsController {
 
     async updateNews(request: Request, response: Response) {
         const newsId = request.params.id;
-        const {titulo, conteudo} = request.body
+        const {titulo, conteudo, sub_conteudo, id_categoria_fk} = request.body
         try {
-            let newsUpdated = Noticia.update({titulo: titulo, conteudo: conteudo}, {where: {id: newsId}})
+            let newsUpdated = await Noticia.update({titulo: titulo, conteudo: conteudo, sub_conteudo: sub_conteudo, id_categoria_fk: id_categoria_fk}, {where: {id: newsId}})
             response.status(200).json({newsUpdated})
             
         } catch (error) {
@@ -58,11 +58,12 @@ export class NewsController {
 
     async deleteNews(request: Request, response: Response) {
         const newsId = request.params.id;
-        const {titulo, conteudo} = request.body
+        console.log(newsId)
         try {
-            let newsDeleted = Noticia.destroy({where: { id: newsId }})
+            let newsDeleted = await Noticia.destroy({where: { id: newsId }})
+            console.log(newsDeleted)
             response.status(200).json({newsDeleted})
-            
+        
         } catch (error) {
             console.log(error)
             response.status(500).json({error})

@@ -70,9 +70,10 @@ class EventoRelacionamentoPhotoController {
     }
     deleteRelation(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { idNews } = request.params;
+            const { idEvent } = request.params;
+            console.log(idEvent);
             try {
-                const relationDeleted = yield eventRelationPhoto_1.EventoRelacionamentoPhoto.destroy({ where: { id_event_fk: idNews } });
+                const relationDeleted = yield eventRelationPhoto_1.EventoRelacionamentoPhoto.destroy({ where: { id_event_fk: idEvent } });
                 response.status(200).json({ relationDeleted: relationDeleted });
             }
             catch (error) {

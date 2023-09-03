@@ -13,6 +13,6 @@ router.post('/registerRelation', relationPhotoController.registerRelation)
 
 router.put('/updateRelation/:idNews', relationPhotoController.updateRelation)
 
-router.delete('/deleteRelation/:idNews')
+router.delete('/deleteRelation/:id', relationPhotoController.deleteRelation)
 
 export const relationRouter = router;

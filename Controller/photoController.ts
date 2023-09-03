@@ -64,9 +64,9 @@ export class PhotoController {
         const uploadsPath = `/uploads/${file}`
         try {
             const imageBuffer = await fs.readFile(uploadsPath)
-            const imageUpdated = await Foto.update({caminho: uploadsPath, imagem_data: imageBuffer}, {where: {id: photoId}})
+            const imageUpdated = await Foto.update({caminho: uploadsPath, imagem_data: imageBuffer}, {where: {id: Number(photoId)}})
             await fs.unlink(uploadsPath).then(async () => {
-                response.status(200).json({message: 'Imagem atualizada', imageUpdated})  
+                response.status(200).json({message: 'Imagem atualizada', imageUpdated, photoId, uploadsPath})  
             })
                           
         } catch (error) {
@@ -78,22 +78,15 @@ export class PhotoController {
 
     async deleteImage(request: Request, response: Response) {
         const photoId = request.params.id;
-        const uploadsPath = path.join(__dirname, '../uploads')
+        const file: any = request.file?.filename
+        const uploadsPath = `/uploads/${file}`
         try {
-            const file : any = await Foto.findByPk(photoId)
-            const imagePath = path.join(uploadsPath, file?.caminho)
-
-            fs.unlink(imagePath).then(async () => {
-                await Foto.destroy({where: { id: photoId }})
-                response.status(200).json({message: 'Arquivo deletado com sucesso!'})
-            })
-            
+            const photoDeleted = await Foto.destroy({where: { id: photoId }})
+            response.status(200).json(photoDeleted)
         } catch (error) {
             console.error(error)
             response.status(500).json({error: error})
         }
-        
-
-        
+                
     }
 }

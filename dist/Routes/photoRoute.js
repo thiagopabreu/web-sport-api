@@ -9,7 +9,7 @@ const photoController_1 = require("../Controller/photoController");
 const multer_1 = __importDefault(require("multer"));
 let router = (0, express_1.Router)();
 const storage = multer_1.default.diskStorage({
-    destination: 'dist/uploads',
+    destination: '/uploads',
     filename: (req, file, callback) => {
         const date = Date.now();
         const filename = file.originalname.replace(/[^a-zA-Z0-9]/g, '_');

@@ -58,10 +58,10 @@ export class EventoRelacionamentoPhotoController {
     }
 
     async deleteRelation(request: Request, response: Response) {
-        const {idNews} = request.params
-
+        const {idEvent} = request.params
+        console.log(idEvent)
         try {
-            const relationDeleted = await EventoRelacionamentoPhoto.destroy({where: { id_event_fk: idNews}})
+            const relationDeleted = await EventoRelacionamentoPhoto.destroy({where: { id_event_fk: idEvent}})
 
             response.status(200).json({relationDeleted: relationDeleted})
         } catch (error) {

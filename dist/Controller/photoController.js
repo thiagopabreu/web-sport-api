@@ -49,7 +49,7 @@ class PhotoController {
             try {
                 console.log('entrei aqui');
                 const uploadedFileName = (_a = request.file) === null || _a === void 0 ? void 0 : _a.filename;
-                const imagePath = `../noticia-esporte-back/dist/uploads/${uploadedFileName}`;
+                const imagePath = `/uploads/${uploadedFileName}`;
                 const imageBuffer = yield promises_1.default.readFile(imagePath);
                 console.log(imageBuffer);
                 const foto = yield photosModel_1.Foto.create({ caminho: uploadedFileName, imagem_data: imageBuffer });
@@ -68,13 +68,12 @@ class PhotoController {
         return __awaiter(this, void 0, void 0, function* () {
             const photoId = request.params.id;
             const file = (_a = request.file) === null || _a === void 0 ? void 0 : _a.filename;
-            const uploadsPath = path_1.default.join(__dirname, '../uploads');
+            const uploadsPath = `/uploads/${file}`;
             try {
-                const oldFile = yield photosModel_1.Foto.findByPk(photoId);
-                const oldImagePath = path_1.default.join(uploadsPath, oldFile.caminho);
-                yield promises_1.default.unlink(oldImagePath).then(() => __awaiter(this, void 0, void 0, function* () {
-                    yield photosModel_1.Foto.update({ caminho: file }, { where: { id: photoId } });
-                    response.status(200).json({ message: 'Imagem atualizada' });
+                const imageBuffer = yield promises_1.default.readFile(uploadsPath);
+                const imageUpdated = yield photosModel_1.Foto.update({ caminho: uploadsPath, imagem_data: imageBuffer }, { where: { id: Number(photoId) } });
+                yield promises_1.default.unlink(uploadsPath).then(() => __awaiter(this, void 0, void 0, function* () {
+                    response.status(200).json({ message: 'Imagem atualizada', imageUpdated, photoId, uploadsPath });
                 }));
             }
             catch (error) {
@@ -84,16 +83,14 @@ class PhotoController {
         });
     }
     deleteImage(request, response) {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const photoId = request.params.id;
-            const uploadsPath = path_1.default.join(__dirname, '../uploads');
+            const file = (_a = request.file) === null || _a === void 0 ? void 0 : _a.filename;
+            const uploadsPath = `/uploads/${file}`;
             try {
-                const file = yield photosModel_1.Foto.findByPk(photoId);
-                const imagePath = path_1.default.join(uploadsPath, file === null || file === void 0 ? void 0 : file.caminho);
-                promises_1.default.unlink(imagePath).then(() => __awaiter(this, void 0, void 0, function* () {
-                    yield photosModel_1.Foto.destroy({ where: { id: photoId } });
-                    response.status(200).json({ message: 'Arquivo deletado com sucesso!' });
-                }));
+                const photoDeleted = yield photosModel_1.Foto.destroy({ where: { id: photoId } });
+                response.status(200).json(photoDeleted);
             }
             catch (error) {
                 console.error(error);

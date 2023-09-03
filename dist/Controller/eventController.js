@@ -54,9 +54,9 @@ class EventController {
     updateEvent(request, response) {
         return __awaiter(this, void 0, void 0, function* () {
             const id = request.params.id;
-            const { nome_evento, descricao, data_fim } = request.body;
+            const { nome_evento, descricao, data_fim, local } = request.body;
             try {
-                const eventUpdate = yield eventModel_1.Evento.update({ nome_evento, descricao, data_fim }, { where: { id: id } });
+                const eventUpdate = yield eventModel_1.Evento.update({ nome_evento, descricao, data_fim, local }, { where: { id: id } });
                 response.status(200).json({ eventUpdate: eventUpdate });
             }
             catch (error) {
