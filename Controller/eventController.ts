@@ -47,7 +47,7 @@ export class EventController {
 
     async updateEvent(request: Request, response: Response) {
         const id = request.params.id
-        const { nome_evento, descricao, data_fim, local } = request.body;
+        const { nome_evento, descricao, data_evento, local } = request.body;
         try {
             const eventUpdate = await Evento.update({nome_evento, descricao, data_fim, local}, {where:{ id: id}})
 
